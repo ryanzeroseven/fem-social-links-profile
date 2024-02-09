@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Social like profile](https://ryanzeroseven.github.io/fem-social-links-profile/)
+- Live Site URL: [Social link profile](https://ryanzeroseven.github.io/fem-social-links-profile/)
 
 ## My process
 

@@ -8,21 +8,35 @@
   --fw-600: 600;
   --fw-700: 700;
 
-  --clr-primary: hsl(75, 94%, 57%);
+  --primary: 159, 94%, 57%;
+
+  --clr-primary: hsl(var(--primary));
+  --clr-primary-accent: hsl(var(--primary), 0.4);
 
   --clr-white: hsl(0, 0%, 100%);
+  --clr-white-accent: hsl(0, 0%, 100%, 0.8);
   --clr-grey: hsl(0, 0%, 20%);
   --clr-dark-grey: hsl(0, 0%, 12%);
   --clr-off-black: hsl(0, 0%, 8%);
 
+  --clr-linkedIn: hsl(210, 90.2%, 40%);
+  --clr-fem: hsl(227, 44.9%, 44.1%);
+  --clr-ig: hsl(333, 67.8%, 50%);
+
   --spacing-m: 1.75rem;
 }
+
+/* Light yellow (Hex: #feda75 and RGB: 254,218,117), orange (Hex: #fa7e1e and RGB: 250,126,30), pink (Hex: #d62976 and RGB: 214,41,118), purple (Hex: #962fbf and RGB: 150,47,191) and blue (Hex: #4f5bd5 and RGB: 79,91,213). */
 
 /* makes sizing simpler */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+:focus {
+  outline: solid 2px var(--clr-primary);
 }
 
 /* remove default spacing */
@@ -108,7 +122,8 @@ ol {
 
 article {
   background: var(--clr-dark-grey);
-  padding: clamp(var(--spacing-m), 7vw, 2.5rem);
+  padding: clamp(1.25rem, 7vw, 2.5rem);
+  /* padding: 2vw; */
   border-radius: 1rem;
   width: min(85%, 22.5rem);
 }
@@ -154,12 +169,32 @@ menu li {
   text-align: center;
 }
 
-li a {
+.link {
   display: block;
   background: var(--clr-grey);
   padding: 1rem 0;
   border-radius: 0.75rem;
-  color: inherit;
+  color: var(--clr-white-accent);
   text-decoration: none;
   font-weight: var(--fw-600);
+
+  transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out,
+    letter-spacing 0.2s ease-in-out;
+}
+
+.link:hover {
+  color: var(--clr-white);
+  text-shadow: var(--clr-white) 1px 0 10px;
+  box-shadow: 1px 5px 15px var(--clr-primary-accent);
+  transform: translateY(-3px);
+  letter-spacing: 2px;
+}
+
+.link:active {
+  transform: translateY(-1px);
+}
+
+.link.fem:hover {
+  box-shadow: 1px 5px 15px var(--clr-fem);
 }

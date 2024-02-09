@@ -24,9 +24,13 @@
   --clr-ig: hsl(333, 67.8%, 50%);
 
   --spacing-m: 1.75rem;
-}
 
-/* Light yellow (Hex: #feda75 and RGB: 254,218,117), orange (Hex: #fa7e1e and RGB: 250,126,30), pink (Hex: #d62976 and RGB: 214,41,118), purple (Hex: #962fbf and RGB: 150,47,191) and blue (Hex: #4f5bd5 and RGB: 79,91,213). */
+  --letter-spacing: 2px;
+
+  --img-size: 6.5rem;
+
+  --boxShadow-offset: 1px 5px 15px;
+}
 
 /* makes sizing simpler */
 *,
@@ -57,12 +61,11 @@ html {
 /* min body height */
 body {
   min-height: 100svh;
-  font-family: var(--ff);
-  background: var(--clr-off-black);
-  display: grid;
-  place-items: center;
-  color: var(--clr-white);
+
   font-size: var(--fs-400);
+  font-family: var(--ff);
+  color: var(--clr-white);
+  background: var(--clr-off-black);
 }
 
 /* responsive images/videos */
@@ -78,7 +81,7 @@ img {
   height: auto;
   vertical-align: middle;
   font-style: italic;
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-size: cover;
   shape-margin: 0.75rem;
 }
@@ -120,25 +123,45 @@ ol {
   width: 1px;
 }
 
-article {
-  background: var(--clr-dark-grey);
-  padding: clamp(1.25rem, 7vw, 2.5rem);
-  /* padding: 2vw; */
-  border-radius: 1rem;
+/* Utility class to center items mainly  */
+.grid-items-center {
+  display: grid;
+  place-items: center;
+}
+
+.glow {
+  position: relative;
+  z-index: 1;
   width: min(85%, 22.5rem);
 }
 
+article {
+  background: var(--clr-dark-grey);
+  padding: clamp(1.25rem, 7vw, 2.5rem);
+  border-radius: 1rem;
+
+  position: relative;
+  z-index: 1;
+}
+
+article section {
+  width: 100%;
+}
+
+article,
 figure {
-  display: grid;
-  place-items: center;
-  margin-bottom: var(--spacing-m);
+  gap: var(--spacing-m) 0;
 }
 
 figure img {
-  border-radius: 50%;
-  width: 100px;
+  width: var(--img-size);
   aspect-ratio: 1;
-  margin-bottom: var(--spacing-m);
+  border: 3px solid transparent;
+  border-radius: 50%;
+}
+
+figcaption {
+  text-align: center;
 }
 
 figcaption h2 {
@@ -149,18 +172,15 @@ figcaption h2 {
 figure p {
   color: var(--clr-primary);
   font-weight: var(--fw-700);
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-spacing);
 }
 
 q {
   display: block;
-  margin-bottom: 1.75rem;
   text-align: center;
 }
 
 menu {
-  display: grid;
-  place-items: center;
   gap: 1rem 0;
 }
 
@@ -171,13 +191,14 @@ menu li {
 
 .link {
   display: block;
-  background: var(--clr-grey);
-  padding: 1rem 0;
-  border-radius: 0.75rem;
   color: var(--clr-white-accent);
-  text-decoration: none;
   font-weight: var(--fw-600);
+  text-decoration: none;
 
+  background: var(--clr-grey);
+  border-radius: 0.75rem;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 1rem 0;
   transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
     transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out,
     letter-spacing 0.2s ease-in-out;
@@ -186,15 +207,88 @@ menu li {
 .link:hover {
   color: var(--clr-white);
   text-shadow: var(--clr-white) 1px 0 10px;
-  box-shadow: 1px 5px 15px var(--clr-primary-accent);
-  transform: translateY(-3px);
-  letter-spacing: 2px;
 }
 
-.link:active {
-  transform: translateY(-1px);
-}
+/* If user has reduced motion turned on, animations won't show. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Makes a gradient glo surrounding the main element */
+  .glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: color-burn;
+    background: conic-gradient(
+      red,
+      magenta,
+      blue,
+      limegreen,
+      yellow,
+      darkorange,
+      red
+    );
+    /* background-size needed to make it move. */
+    background-size: 200% 200%;
+    filter: blur(2rem);
+    animation: moveGlow 20s alternate infinite;
+    z-index: -1;
+  }
 
-.link.fem:hover {
-  box-shadow: 1px 5px 15px var(--clr-fem);
+  /* Specific glow styling for the image */
+  figure .glow::after {
+    width: var(--img-size);
+    aspect-ratio: 1;
+    filter: blur(0);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--clr-primary),
+      var(--clr-primary-accent),
+      var(--clr-white),
+      var(--clr-primary-accent),
+      var(--clr-primary)
+    );
+    background-size: 200% 200%;
+  }
+
+  @keyframes moveGlow {
+    0% {
+      background-position: top left;
+    }
+    25% {
+      background-position: bottom right;
+    }
+    50% {
+      background-position: top right;
+    }
+    75% {
+      background-position: bottom left;
+    }
+  }
+
+  /* Hover animation. */
+  .link:hover {
+    box-shadow: var(--boxShadow-offset) var(--clr-primary-accent);
+    transform: translateY(-3px);
+    letter-spacing: var(--letter-spacing);
+  }
+
+  /* Hover animation specific to the social link. */
+  .link.github:hover {
+    box-shadow: var(--boxShadow-offset) -4px var(--clr-white-accent);
+  }
+  .link.fem:hover {
+    box-shadow: var(--boxShadow-offset) var(--clr-fem);
+  }
+  .link.linkedin:hover {
+    box-shadow: var(--boxShadow-offset) var(--clr-linkedIn);
+  }
+  .link.ig:hover {
+    box-shadow: var(--boxShadow-offset) var(--clr-ig);
+  }
+
+  .link:active {
+    transform: translateY(-1px);
+  }
 }

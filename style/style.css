@@ -30,6 +30,9 @@
   --img-size: 6.5rem;
 
   --boxShadow-offset: 1px 5px 15px;
+
+  --border-radius-400: 1rem;
+  --border-radius-50: 50%;
 }
 
 /* makes sizing simpler */
@@ -61,6 +64,7 @@ html {
 /* min body height */
 body {
   min-height: 100svh;
+  padding-block: 2rem;
 
   font-size: var(--fs-400);
   font-family: var(--ff);
@@ -133,12 +137,13 @@ ol {
   position: relative;
   z-index: 1;
   width: min(85%, 22.5rem);
+  border-radius: var(--border-radius-400);
 }
 
 article {
   background: var(--clr-dark-grey);
   padding: clamp(1.25rem, 7vw, 2.5rem);
-  border-radius: 1rem;
+  border-radius: var(--border-radius-400);
 
   position: relative;
   z-index: 1;
@@ -156,8 +161,8 @@ figure {
 figure img {
   width: var(--img-size);
   aspect-ratio: 1;
-  border: 3px solid transparent;
-  border-radius: 50%;
+  border: 5px solid transparent;
+  border-radius: var(--border-radius-50);
 }
 
 figcaption {
@@ -241,7 +246,7 @@ menu li {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
+    border-radius: var(--border-radius-50);
     background: conic-gradient(
       var(--clr-primary),
       var(--clr-primary-accent),

@@ -223,25 +223,27 @@ menu li {
     animation: moveGlow 15s alternate infinite;
   }
 
-  /* Makes a gradient glow surrounding the main element */
-  .main.glow::after {
-    inset: -0.25rem;
-    border-radius: var(--border-radius-400);
-    background: conic-gradient(
-      red,
-      magenta,
-      blue,
-      limegreen,
-      yellow,
-      darkorange,
-      red
-    );
-    /* background-size needed to make it move. */
-    background-size: 200% 200%;
-    /* filter: blur(0.5rem); */
-    /* maybe fixes for Safari?  */
-    -webkit-backdrop-filter: blur(2rem);
-    transform: translate3d(0, 0, 0);
+  @media (min-width: 36em) {
+    /* Makes a gradient glow surrounding the main element */
+    .main.glow::after {
+      inset: -0.25rem;
+      border-radius: var(--border-radius-400);
+      background: conic-gradient(
+        red,
+        magenta,
+        blue,
+        limegreen,
+        yellow,
+        darkorange,
+        red
+      );
+      /* background-size needed to make it move. */
+      background-size: 200% 200%;
+      /* filter: blur(0.5rem); */
+      /* maybe fixes for Safari?  */
+      -webkit-backdrop-filter: blur(2rem);
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   /* Specific glow styling for the image */

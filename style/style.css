@@ -225,8 +225,8 @@ menu li {
 
   /* Makes a gradient glow surrounding the main element */
   .main.glow::after {
-    inset: 0.25rem;
-    border-radius: 5rem;
+    inset: -0.25rem;
+    border-radius: var(--border-radius-400);
     background: conic-gradient(
       red,
       magenta,
@@ -238,7 +238,7 @@ menu li {
     );
     /* background-size needed to make it move. */
     background-size: 200% 200%;
-    filter: blur(2rem);
+    /* filter: blur(0.5rem); */
     /* maybe fixes for Safari?  */
     -webkit-backdrop-filter: blur(2rem);
     transform: translate3d(0, 0, 0);
@@ -247,7 +247,7 @@ menu li {
   /* Specific glow styling for the image */
   figure .glow::after {
     inset: 0;
-    filter: blur(0);
+    /* filter: blur(0); */
     border-radius: var(--border-radius-50);
     background: conic-gradient(
       var(--clr-primary),

@@ -225,7 +225,7 @@ menu li {
 
   /* Makes a gradient glow surrounding the main element */
   .main.glow::after {
-    inset: 0.3rem;
+    inset: 0;
     border-radius: var(--border-radius-400);
     background: conic-gradient(
       red,
